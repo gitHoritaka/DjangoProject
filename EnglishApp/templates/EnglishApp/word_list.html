@@ -1,0 +1,40 @@
+<h1>Today's News</h1>
+<form method = 'POST'>
+    <input type = 'submit' value = 'submit'>
+    {% csrf_token %}
+    <div id = 'main'>
+        <script>
+            {% autoescape off %}
+                var descriptions = {{Descriptions}};
+                var urls = {{Urls}};
+            {% endautoescape %}
+            for (var index = 0;index < descriptions.length;index++){
+                console.log(index);
+                console.log(descriptions[index]);
+                var br = document.createElement('br');
+                var parent = document.getElementById('main');
+                parent.appendChild(br);
+                for (var word_index=0; word_index < descriptions[index].length;word_index++){
+                    var value = String(index) + '/' + String(word_index);
+                    var word = descriptions[index][word_index]
+                    var checkbox = document.createElement('input');
+                    var label = document.createElement('label');
+                    label.appendChild(document.createTextNode(word));
+                    checkbox.name = 'checkbox';
+                    checkbox.value = value;
+                    checkbox.type = 'checkbox';
+                    label.htmlFor = value;
+                    parent.appendChild(checkbox);
+                    parent.appendChild(label);
+                }
+                var atag = document.createElement('a');
+                atag.href = urls[index];
+                atag.appendChild(document.createTextNode('go to link'));
+                parent.appendChild(atag);
+                parent.appendChild(br);
+
+            }
+        </script>
+
+    </div>
+</form>

@@ -1,0 +1,5 @@
+<h1>Here is your selected words</h1>
+{%for word in checked_words%}
+<p>{{word}}</p>
+{%endfor%}
+<a href = '{%url 'news' %}' >back</a>
